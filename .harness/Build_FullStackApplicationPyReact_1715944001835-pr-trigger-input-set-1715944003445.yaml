@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_FullStackApplicationPyReact_1715944001835-pr-trigger-input-set
+  identifier: Build_FullStackApplicationPyReact_1715944001835prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_FullStackApplicationPyReact_1715944001835
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
