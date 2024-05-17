@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_FullStackApplicationPyReact_1715944001835-push-trigger-input-set
+  identifier: Build_FullStackApplicationPyReact_1715944001835pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_FullStackApplicationPyReact_1715944001835
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
