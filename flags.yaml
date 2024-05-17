@@ -1,0 +1,46 @@
+featureFlags:
+  flags:
+  - flag:
+      name: Flag2
+      identifier: Flag2
+      description: ""
+      permanent: true
+      spec:
+        type: boolean
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        variations:
+        - identifier: "true"
+          value: "true"
+        - identifier: "false"
+          value: "false"
+      environments:
+      - identifier: dev
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "on"
+  - flag:
+      name: GitHubActionsFlag
+      identifier: githubactionsflag
+      description: ""
+      permanent: false
+      spec:
+        type: boolean
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        variations:
+        - identifier: "true"
+          value: "true"
+        - identifier: "false"
+          value: "false"
+      environments:
+      - identifier: dev
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "on"
+  projectIdentifier: default_project
+  orgIdentifier: default
