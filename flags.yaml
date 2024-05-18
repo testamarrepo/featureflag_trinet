@@ -28,8 +28,30 @@ pipeline:
             steps:
               - step:
                   type: Run
-                  name: Run_1
-                  identifier: Run_1
+                  name: build
+                  identifier: build
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: maven:3.8.3-openjdk-17
+                    shell: Sh
+                    command: mvn clean package dependency:copy-dependencies
+              - step:
+                  type: Run
+                  name: Junit Tests
+                  identifier: Junit_Tests
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: maven:3.8.3-openjdk-17
+                    shell: Sh
+                    command: mvn test
+              - step:
+                  type: Run
+                  name: push to prod
+                  identifier: push_to_prod
                   spec:
                     shell: Sh
-                    command: echo 'success'
+                    command: |-
+                      git fetch --all && git checkout prod  &&
+                              git merge origin/dev &&
+                              git push https://<+secrets.getValue("GIT_USERNAME")>:<+secrets.getValue("GIT_PASSWORD")>@github.com/jha713/featureflag_trinet.git prod ||
+                              echo "Error: Failed to move changes to prod branch"
