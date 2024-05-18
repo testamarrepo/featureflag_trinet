@@ -28,22 +28,19 @@ pipeline:
             steps:
               - step:
                   type: Run
-                  name: build
-                  identifier: build
+                  name: Run Tests
+                  identifier: run_tests
                   spec:
                     connectorRef: account.harnessImage
-                    image: maven:3.8.3-openjdk-17
+                    image: python:3.9
                     shell: Sh
-                    command: mvn clean package dependency:copy-dependencies
-              - step:
-                  type: Run
-                  name: Junit Tests
-                  identifier: Junit_Tests
-                  spec:
-                    connectorRef: account.harnessImage
-                    image: maven:3.8.3-openjdk-17
-                    shell: Sh
-                    command: mvn test
+                    command: |
+                      pip install django
+                      python -m pip install harness-featureflags
+                      pip install django-cors-headers
+                      pip install djangorestframework
+                      cd backend/user_api
+                      python manage.py test usersApp
               - step:
                   type: Run
                   name: push to prod
