@@ -1,5 +1,5 @@
 # Build frontend image (stage 1)
-FROM node:lts  AS frontend-builder
+FROM python3.12-nodejs22  AS frontend-builder
 
 WORKDIR /app
 
