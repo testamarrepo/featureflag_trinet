@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY frontend ./
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
 RUN npm run build
