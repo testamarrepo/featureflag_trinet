@@ -1,31 +1,25 @@
-# Use a lightweight Node image for building React app
-FROM node:alpine AS frontendRunner
+# Build frontend image (stage 1)
+FROM node:alpine AS frontend-builder
 
 WORKDIR /app
 
 COPY frontend ./
-COPY backend ./
-
-
-WORKDIR /app/frontend
 
 RUN npm install
 
-# Build React app for production
 COPY . .
 RUN npm run build
 
-
-
-# Use a Python image for the backend
+# Build backend image (stage 2)
 FROM python:3.8-slim
 
-WORKDIR /app/backend
+WORKDIR /app
 
+COPY backend ./
 RUN pip install -r requirements.txt
 
-# Copy static files from React build
-COPY --from=frontend /app/frontend/build /app/backend/static
+# Copy static files from built frontend (stage 3)
+COPY --from=frontend-builder /app/frontend/build /app/backend/static
 
 # Expose Django port
 EXPOSE 8000
