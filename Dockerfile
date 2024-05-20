@@ -1,5 +1,5 @@
 # Build frontend image (stage 1)
-FROM python3.12-nodejs22  AS frontend-builder
+FROM nikolaik/python-nodejs:latest  AS frontend-builder
 
 WORKDIR /app
 
