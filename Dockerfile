@@ -1,21 +1,18 @@
 # Build frontend image (stage 1)
 FROM nikolaik/python-nodejs:latest  AS frontend-builder
-
 WORKDIR /app
 
-COPY frontend ./
-RUN npm install 
-COPY . .
+COPY frontend /app/
+COPY backend /app/
 
+WORKDIR /app/frontend
+RUN npm install 
 RUN npm run build
 
 
-WORKDIR /app
-
-COPY backend ./
-
-
+WORKDIR /app/backend
 RUN pip install -r requirements.txt
+
 
 # Copy static files from built frontend (stage 3)
 COPY  /app/frontend/build /app/backend/static
