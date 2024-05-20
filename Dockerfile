@@ -15,7 +15,7 @@ RUN pip install -r requirements.txt
 
 
 # Copy static files from built frontend (stage 3)
-COPY  /app/frontend/build /app/backend/static
+COPY --FROM=frontend-builder  /app/frontend/build /app/backend/static
 
 # Expose Django port
 EXPOSE 8000
