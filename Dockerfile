@@ -8,14 +8,14 @@ COPY backend /app/
 WORKDIR /app/frontend
 RUN npm install 
 RUN npm run build
-
+RUN ls
 
 WORKDIR /app/backend
 RUN pip install -r requirements.txt
 
 
 # Copy static files from built frontend (stage 3)
-COPY --FROM=frontend-builder  /app/frontend/build /app/backend/static
+# COPY --FROM=frontend-builder  /app/frontend/build /app/backend/static
 
 # Expose Django port
 EXPOSE 8000
