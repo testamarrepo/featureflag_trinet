@@ -4,10 +4,11 @@ FROM node:alpine AS frontend-builder
 WORKDIR /app
 
 COPY frontend ./
-
+npm i react-scripts
 RUN npm install --legacy-peer-deps
-
 COPY . .
+
+npx install
 RUN npm run build
 
 # Build backend image (stage 2)
