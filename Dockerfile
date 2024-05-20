@@ -1,5 +1,5 @@
 # Build frontend image (stage 1)
-FROM node:18 AS frontend-builder
+FROM node:lts  AS frontend-builder
 
 WORKDIR /app
 
