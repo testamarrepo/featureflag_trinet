@@ -9,16 +9,16 @@ COPY . .
 
 RUN npm run build
 
-# Build backend image (stage 2)
-FROM python:3.8-slim
 
 WORKDIR /app
 
 COPY backend ./
+
+
 RUN pip install -r requirements.txt
 
 # Copy static files from built frontend (stage 3)
-COPY --from=frontend-builder /app/frontend/build /app/backend/static
+COPY  /app/frontend/build /app/backend/static
 
 # Expose Django port
 EXPOSE 8000
