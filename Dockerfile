@@ -6,6 +6,7 @@ WORKDIR /app
 COPY frontend ./
 RUN npm install -g npm
 RUN npm install -g react-scripts
+RUN npm install -g create-react-app
 RUN npm install --legacy-peer-deps
 COPY . .
 
